@@ -7,17 +7,17 @@ import android.widget.TextView;
 
 public class SimpleCalc extends Activity {
 
-    private double result = 0;
     private double leftNumber = 0;
-    private double rightNumber = 0;
-    private String savedState;
+    private String savedState = "0";
+    private String operationType = "null";
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         TextView resultBox = findViewById(R.id.resultBox);
         savedState = (String) resultBox.getText();
-        savedInstanceState.putDouble("result", result);
+        savedInstanceState.putDouble("leftNum", leftNumber);
         savedInstanceState.putString("savedState", savedState);
+        savedInstanceState.putString("operation", operationType);
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -25,8 +25,9 @@ public class SimpleCalc extends Activity {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         TextView resultBox = findViewById(R.id.resultBox);
-        result = savedInstanceState.getDouble("result");
+        leftNumber = savedInstanceState.getDouble("leftNum");
         savedState = savedInstanceState.getString("savedState");
+        operationType = savedInstanceState.getString("operation");
         resultBox.setText(savedState);
     }
 
@@ -40,53 +41,87 @@ public class SimpleCalc extends Activity {
     public void click0(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() > 0)
+        if(actualState.length() > 1 || (actualState.indexOf('0') != 0 && actualState.length() == 1))
             resultBox.setText(resultBox.getText() + "0");
     }
 
     public void click1(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "1");
+        String actualState = (String) resultBox.getText();
+        if(actualState.length() == 1 && actualState.equals("0"))
+            resultBox.setText("1");
+        else
+            resultBox.setText(resultBox.getText() + "1");
     }
 
     public void click2(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "2");
+        String actualState = (String) resultBox.getText();
+        if(actualState.length() == 1 && actualState.equals("0"))
+            resultBox.setText("2");
+        else
+            resultBox.setText(resultBox.getText() + "2");
     }
     public void click3(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "3");
+        String actualState = (String) resultBox.getText();
+        if(actualState.length() == 1 && actualState.equals("0"))
+            resultBox.setText("3");
+        else
+            resultBox.setText(resultBox.getText() + "3");
     }
     public void click4(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "4");
+        String actualState = (String) resultBox.getText();
+        if(actualState.length() == 1 && actualState.equals("0"))
+            resultBox.setText("4");
+        else
+            resultBox.setText(resultBox.getText() + "4");
     }
     public void click5(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "5");
+        String actualState = (String) resultBox.getText();
+        if(actualState.length() == 1 && actualState.equals("0"))
+            resultBox.setText("5");
+        else
+            resultBox.setText(resultBox.getText() + "5");
     }
     public void click6(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "6");
+        String actualState = (String) resultBox.getText();
+        if(actualState.length() == 1 && actualState.equals("0"))
+            resultBox.setText("6");
+        else
+            resultBox.setText(resultBox.getText() + "6");
     }
     public void click7(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "7");
+        String actualState = (String) resultBox.getText();
+        if(actualState.length() == 1 && actualState.equals("0"))
+            resultBox.setText("7");
+        else
+            resultBox.setText(resultBox.getText() + "7");
     }
     public void click8(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "8");
+        String actualState = (String) resultBox.getText();
+        if(actualState.length() == 1 && actualState.equals("0"))
+            resultBox.setText("8");
+        else
+            resultBox.setText(resultBox.getText() + "8");
     }
     public void click9(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "9");
+        String actualState = (String) resultBox.getText();
+        if(actualState.length() == 1 && actualState.equals("0"))
+            resultBox.setText("9");
+        else
+            resultBox.setText(resultBox.getText() + "9");
     }
     public void clickDot(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
         if(actualState.indexOf('.') == -1) {
-            if(actualState.length() == 0)
-                resultBox.setText("0");
             resultBox.setText(resultBox.getText() + ".");
         }
     }
@@ -98,32 +133,50 @@ public class SimpleCalc extends Activity {
     }
     public void clickClear(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText("");
+        resultBox.setText("0");
         leftNumber = 0;
-        rightNumber = 0;
-        result = 0;
+        operationType = "none";
+    }
+    public void clickC(View view){
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        if(actualState.length() == 1) {
+            actualState = "0";
+        }
+        if(actualState.length() > 1) {
+            actualState = actualState.substring(0, actualState.length()-1);
+        }
+        resultBox.setText(actualState);
+    }
+    public void clickMul(View view){
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        operationType = "mul";
+        leftNumber = Double.parseDouble(actualState);
+        resultBox.setText("");
+    }
+    public void clickAdd(View view){
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        operationType = "add";
+        leftNumber = Double.parseDouble(actualState);
+        resultBox.setText("");
+    }
+    public void clickSub(View view){
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        operationType = "sub";
+        leftNumber = Double.parseDouble(actualState);
+        resultBox.setText("");
+    }
+    public void clickDiv(View view){
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        operationType = "div";
+        leftNumber = Double.parseDouble(actualState);
+        resultBox.setText("");
     }
     /*public void click1(View view){
-        TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "1");
-    }
-    public void click1(View view){
-        TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "1");
-    }
-    public void click1(View view){
-        TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "1");
-    }
-    public void click1(View view){
-        TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "1");
-    }
-    public void click1(View view){
-        TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "1");
-    }
-    public void click1(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         resultBox.setText(resultBox.getText() + "1");
     }*/

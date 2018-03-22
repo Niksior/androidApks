@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:text="@string/_0"
         android:textAlignment="textEnd"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/keyboard"
@@ -37,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:onClick="clickC"
             android:text="@string/del"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="170dp" />
@@ -47,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/deleteButton"
+            android:onClick="clickClear"
             android:text="@string/c" />
 
         <Button
@@ -94,6 +97,7 @@
             android:layout_alignBaseline="@+id/numberButton9"
             android:layout_alignBottom="@+id/numberButton9"
             android:layout_toEndOf="@+id/signButton"
+            android:onClick="clickDiv"
             android:text="@string/div" />
 
         <Button
@@ -131,6 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/divideButton"
             android:layout_toEndOf="@+id/numberButton9"
+            android:onClick="clickMul"
             android:text="@string/mul" />
 
         <Button
@@ -166,6 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/multiplyButton"
             android:layout_toEndOf="@+id/numberButton6"
+            android:onClick="clickSub"
             android:text="@string/sub" />
 
         <Button
@@ -202,6 +208,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/signButton"
+            android:onClick="clickAdd"
             android:text="@string/plus" />
     </RelativeLayout>
 
