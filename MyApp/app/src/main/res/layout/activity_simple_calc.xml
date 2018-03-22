@@ -200,6 +200,7 @@
             android:layout_alignBaseline="@+id/numberButton0"
             android:layout_alignBottom="@+id/numberButton0"
             android:layout_toEndOf="@+id/numberButton0"
+            android:onClick="clickEq"
             android:text="@string/equ" />
 
         <Button

@@ -1,15 +1,17 @@
 package com.example.niksior.myapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SimpleCalc extends Activity {
 
     private double leftNumber = 0;
     private String savedState = "0";
-    private String operationType = "null";
+    private String operationType = "none";
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class SimpleCalc extends Activity {
     public void click1(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && actualState.equals("0"))
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
             resultBox.setText("1");
         else
             resultBox.setText(resultBox.getText() + "1");
@@ -57,7 +59,7 @@ public class SimpleCalc extends Activity {
     public void click2(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && actualState.equals("0"))
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
             resultBox.setText("2");
         else
             resultBox.setText(resultBox.getText() + "2");
@@ -65,7 +67,7 @@ public class SimpleCalc extends Activity {
     public void click3(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && actualState.equals("0"))
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
             resultBox.setText("3");
         else
             resultBox.setText(resultBox.getText() + "3");
@@ -73,7 +75,7 @@ public class SimpleCalc extends Activity {
     public void click4(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && actualState.equals("0"))
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
             resultBox.setText("4");
         else
             resultBox.setText(resultBox.getText() + "4");
@@ -81,7 +83,7 @@ public class SimpleCalc extends Activity {
     public void click5(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && actualState.equals("0"))
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
             resultBox.setText("5");
         else
             resultBox.setText(resultBox.getText() + "5");
@@ -89,7 +91,7 @@ public class SimpleCalc extends Activity {
     public void click6(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && actualState.equals("0"))
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
             resultBox.setText("6");
         else
             resultBox.setText(resultBox.getText() + "6");
@@ -97,7 +99,7 @@ public class SimpleCalc extends Activity {
     public void click7(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && actualState.equals("0"))
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
             resultBox.setText("7");
         else
             resultBox.setText(resultBox.getText() + "7");
@@ -105,7 +107,7 @@ public class SimpleCalc extends Activity {
     public void click8(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && actualState.equals("0"))
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
             resultBox.setText("8");
         else
             resultBox.setText(resultBox.getText() + "8");
@@ -113,7 +115,7 @@ public class SimpleCalc extends Activity {
     public void click9(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && actualState.equals("0"))
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
             resultBox.setText("9");
         else
             resultBox.setText(resultBox.getText() + "9");
@@ -151,35 +153,66 @@ public class SimpleCalc extends Activity {
     public void clickMul(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        operationType = "mul";
         leftNumber = Double.parseDouble(actualState);
-        resultBox.setText("");
+        if(!operationType.equals("none")) {
+            clickEq(view);
+        } else {
+            resultBox.setText("0");
+        }
+        operationType = "mul";
     }
     public void clickAdd(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
         operationType = "add";
         leftNumber = Double.parseDouble(actualState);
-        resultBox.setText("");
+        resultBox.setText("0");
     }
     public void clickSub(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
         operationType = "sub";
         leftNumber = Double.parseDouble(actualState);
-        resultBox.setText("");
+        resultBox.setText("0");
     }
     public void clickDiv(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
         operationType = "div";
         leftNumber = Double.parseDouble(actualState);
-        resultBox.setText("");
+        resultBox.setText("0");
     }
-    /*public void click1(View view){
+    public void clickEq(View view){
         TextView resultBox = findViewById(R.id.resultBox);
-        resultBox.setText(resultBox.getText() + "1");
-    }*/
+        String actualState = (String) resultBox.getText();
+        double result = 0;
+
+        switch (operationType) {
+            case "div":
+                if (Double.parseDouble(actualState) == 0) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "You can't divide by 0!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast.makeText(context, text, duration).show();
+                } else {
+                    result = leftNumber / Double.parseDouble(actualState);
+                }
+                break;
+            case "add":
+                result = leftNumber + Double.parseDouble(actualState);
+                break;
+            case "mul":
+                result = leftNumber * Double.parseDouble(actualState);
+                break;
+            case "sub":
+                result = leftNumber - Double.parseDouble(actualState);
+                break;
+        }
+
+        leftNumber = result;
+        operationType = "none";
+        resultBox.setText(String.valueOf(result));
+    }
 
 
 
