@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SimpleCalc"></activity>
+        <activity android:name=".SimpleCalc" />
+        <activity android:name=".Credits"></activity>
     </application>
 
 </manifest>

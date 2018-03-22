@@ -21,6 +21,11 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void launchCredits (View view) {
+        Intent intent = new Intent(this, Credits.class);
+        startActivity(intent);
+    }
+
     public void exitApp (View view) {
         exit(1);
     }
