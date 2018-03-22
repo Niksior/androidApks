@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:onClick="clickC"
             android:text="@string/del"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="170dp" />
@@ -55,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/deleteButton"
+            android:onClick="clickClear"
             android:text="@string/c" />
 
         <Button
@@ -63,6 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/additionButton"
+            android:onClick="clickSign"
             android:text="@string/sign" />
 
         <Button
@@ -72,6 +75,7 @@
             android:layout_alignBaseline="@+id/numberButton8"
             android:layout_alignBottom="@+id/numberButton8"
             android:layout_alignParentStart="true"
+            android:onClick="click7"
             android:text="@string/_7" />
 
         <Button
@@ -80,6 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/deleteButton"
             android:layout_toEndOf="@+id/deleteButton"
+            android:onClick="click8"
             android:text="@string/_8" />
 
         <Button
@@ -89,6 +94,7 @@
             android:layout_alignBaseline="@+id/divideButton"
             android:layout_alignBottom="@+id/divideButton"
             android:layout_toStartOf="@+id/divideButton"
+            android:onClick="click9"
             android:text="@string/_9" />
 
         <Button
@@ -97,6 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/additionButton"
+            android:onClick="clickDiv"
             android:text="@string/div" />
 
         <Button
@@ -106,6 +113,7 @@
             android:layout_alignBaseline="@+id/numberButton5"
             android:layout_alignBottom="@+id/numberButton5"
             android:layout_alignParentStart="true"
+            android:onClick="click4"
             android:text="@string/_4" />
 
         <Button
@@ -114,6 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/numberButton8"
             android:layout_toEndOf="@+id/numberButton4"
+            android:onClick="click5"
             android:text="@string/_5" />
 
         <Button
@@ -122,6 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/numberButton9"
             android:layout_below="@+id/numberButton9"
+            android:onClick="click6"
             android:text="@string/_6" />
 
         <Button
@@ -130,6 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/divideButton"
+            android:onClick="clickMul"
             android:text="@string/mul" />
 
         <Button
@@ -147,6 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/numberButton4"
             android:layout_toEndOf="@+id/numberButton1"
+            android:onClick="click2"
             android:text="@string/_2" />
 
         <Button
@@ -156,6 +168,7 @@
             android:layout_alignBaseline="@+id/subtractionButton"
             android:layout_alignBottom="@+id/subtractionButton"
             android:layout_alignStart="@+id/numberButton6"
+            android:onClick="click3"
             android:text="@string/_3" />
 
         <Button
@@ -164,6 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/multiplyButton"
+            android:onClick="clickSub"
             android:text="@string/sub" />
 
         <Button
@@ -173,6 +187,7 @@
             android:layout_alignBaseline="@+id/numberButton0"
             android:layout_alignBottom="@+id/numberButton0"
             android:layout_alignParentStart="true"
+            android:onClick="clickDot"
             android:text="@string/comma" />
 
         <Button
@@ -181,6 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/numberButton2"
             android:layout_toEndOf="@+id/numberButton1"
+            android:onClick="click0"
             android:text="@string/_0" />
 
         <Button
@@ -189,6 +205,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/subtractionButton"
+            android:onClick="clickEq"
             android:text="@string/equ" />
 
         <Button
@@ -197,6 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:onClick="clickAdd"
             android:text="@string/plus" />
     </RelativeLayout>
 

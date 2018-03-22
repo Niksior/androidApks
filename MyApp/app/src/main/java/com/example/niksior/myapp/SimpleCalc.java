@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -153,13 +154,10 @@ public class SimpleCalc extends Activity {
     public void clickMul(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        leftNumber = Double.parseDouble(actualState);
-        if(!operationType.equals("none")) {
-            clickEq(view);
-        } else {
-            resultBox.setText("0");
-        }
         operationType = "mul";
+        leftNumber = Double.parseDouble(actualState);
+        resultBox.setText("0");
+        changeButtonsState(false);
     }
     public void clickAdd(View view){
         TextView resultBox = findViewById(R.id.resultBox);
@@ -167,6 +165,7 @@ public class SimpleCalc extends Activity {
         operationType = "add";
         leftNumber = Double.parseDouble(actualState);
         resultBox.setText("0");
+        changeButtonsState(false);
     }
     public void clickSub(View view){
         TextView resultBox = findViewById(R.id.resultBox);
@@ -174,6 +173,7 @@ public class SimpleCalc extends Activity {
         operationType = "sub";
         leftNumber = Double.parseDouble(actualState);
         resultBox.setText("0");
+        changeButtonsState(false);
     }
     public void clickDiv(View view){
         TextView resultBox = findViewById(R.id.resultBox);
@@ -181,6 +181,7 @@ public class SimpleCalc extends Activity {
         operationType = "div";
         leftNumber = Double.parseDouble(actualState);
         resultBox.setText("0");
+        changeButtonsState(false);
     }
     public void clickEq(View view){
         TextView resultBox = findViewById(R.id.resultBox);
@@ -212,8 +213,19 @@ public class SimpleCalc extends Activity {
         leftNumber = result;
         operationType = "none";
         resultBox.setText(String.valueOf(result));
+        changeButtonsState(true);
     }
 
+    private void changeButtonsState(boolean state) {
+        Button button1 = findViewById(R.id.additionButton);
+        Button button2 = findViewById(R.id.multiplyButton);
+        Button button3 = findViewById(R.id.divideButton);
+        Button button4 = findViewById(R.id.subtractionButton);
 
+        button1.setEnabled(state);
+        button2.setEnabled(state);
+        button3.setEnabled(state);
+        button4.setEnabled(state);
+    }
 
 }
