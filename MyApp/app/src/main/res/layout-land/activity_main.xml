@@ -58,6 +58,7 @@
             android:layout_marginEnd="0dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
+            android:onClick="launchAdvancedCalc"
             android:text="@string/not_so_simple"
             app:layout_constraintBottom_toTopOf="@+id/creditsButton"
             app:layout_constraintEnd_toEndOf="parent"

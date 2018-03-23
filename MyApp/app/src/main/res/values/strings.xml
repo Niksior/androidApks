@@ -25,4 +25,12 @@
     <string name="equ">=</string>
     <string name="plus">+</string>
     <string name="hello_have_a_nice_day_created_by_micha_niksa">| hello || have a nice day || created by Michał Niksa |</string>
+    <string name="sqrt">sqrt</string>
+    <string name="x_2">x^2</string>
+    <string name="x_y">x^y</string>
+    <string name="log">log</string>
+    <string name="sin">SIN</string>
+    <string name="cos">COS</string>
+    <string name="tan">TAN</string>
+    <string name="ln">ln</string>
 </resources>

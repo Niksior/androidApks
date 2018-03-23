@@ -26,6 +26,11 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void launchAdvancedCalc (View view) {
+        Intent intent = new Intent(this, AdvancedCalc.class);
+        startActivity(intent);
+    }
+
     public void exitApp (View view) {
         exit(1);
     }
