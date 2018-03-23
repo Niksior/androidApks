@@ -8,12 +8,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SimpleCalc extends Activity {
+public class SimpleCalc extends Activity implements Controlls {
 
-    private double leftNumber = 0;
-    private String savedState = "0";
-    private String operationType = "none";
-    private boolean isDone = false;
+    protected double leftNumber = 0;
+    protected String savedState = "0";
+    protected String operationType = "none";
+    protected boolean isDone = false;
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -230,7 +230,7 @@ public class SimpleCalc extends Activity {
         isDone = true;
     }
 
-    private void changeButtonsState(boolean state) {
+    public void changeButtonsState(boolean state) {
         Button button1 = findViewById(R.id.additionButton);
         Button button2 = findViewById(R.id.multiplyButton);
         Button button3 = findViewById(R.id.divideButton);
