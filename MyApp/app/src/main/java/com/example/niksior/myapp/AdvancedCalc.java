@@ -11,8 +11,6 @@ public class AdvancedCalc extends SimpleCalc implements Controlls {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_calc);
-        Button button0 = findViewById(R.id.equalsButton);
-        button0.setEnabled(false);
     }
 
     public void changeButtonsState(boolean state) {

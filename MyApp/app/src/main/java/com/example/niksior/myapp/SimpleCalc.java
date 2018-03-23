@@ -32,6 +32,10 @@ public class SimpleCalc extends Activity implements Controlls {
         leftNumber = savedInstanceState.getDouble("leftNum");
         savedState = savedInstanceState.getString("savedState");
         operationType = savedInstanceState.getString("operation");
+        if(operationType.equals("none"))
+            changeButtonsState(true);
+        else
+            changeButtonsState(false);
         resultBox.setText(savedState);
     }
 
@@ -39,9 +43,9 @@ public class SimpleCalc extends Activity implements Controlls {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_calc);
-        Button button0 = findViewById(R.id.equalsButton);
-        button0.setEnabled(false);
     }
+
+//    protected void
 
     public void click0(View view){
         TextView resultBox = findViewById(R.id.resultBox);
