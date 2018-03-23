@@ -14,6 +14,7 @@ public class SimpleCalc extends Activity implements Controlls {
     protected String savedState = "0";
     protected String operationType = "none";
     protected boolean isDone = false;
+    protected double rightNumber = 0;
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -22,6 +23,8 @@ public class SimpleCalc extends Activity implements Controlls {
         savedInstanceState.putDouble("leftNum", leftNumber);
         savedInstanceState.putString("savedState", savedState);
         savedInstanceState.putString("operation", operationType);
+        savedInstanceState.putDouble("rightNum", rightNumber);
+        savedInstanceState.putBoolean("state", isDone);
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -32,6 +35,8 @@ public class SimpleCalc extends Activity implements Controlls {
         leftNumber = savedInstanceState.getDouble("leftNum");
         savedState = savedInstanceState.getString("savedState");
         operationType = savedInstanceState.getString("operation");
+        rightNumber = savedInstanceState.getDouble("rightNum");
+        isDone = savedInstanceState.getBoolean("state");
         if(operationType.equals("none"))
             changeButtonsState(true);
         else
@@ -45,15 +50,15 @@ public class SimpleCalc extends Activity implements Controlls {
         setContentView(R.layout.activity_simple_calc);
     }
 
-//    protected void
-
     public void click0(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
         if(isDone)
             resultBox.setText("0");
-        else if(actualState.length() > 1 || (actualState.indexOf('0') != 0 && actualState.length() == 1))
+        else if(actualState.length() > 1 || (actualState.indexOf('0') != 0 && actualState.length() == 1)) {
+            operationType = "none";
             resultBox.setText(resultBox.getText() + "0");
+        }
         isDone = false;
     }
 
@@ -62,8 +67,10 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("1");
-        else
+        else {
+            operationType = "none";
             resultBox.setText(resultBox.getText() + "1");
+        }
         isDone = false;
     }
 
@@ -72,8 +79,10 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("2");
-        else
+        else {
+            operationType = "none";
             resultBox.setText(resultBox.getText() + "2");
+        }
         isDone = false;
     }
     public void click3(View view){
@@ -81,8 +90,10 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("3");
-        else
+        else {
+            operationType = "none";
             resultBox.setText(resultBox.getText() + "3");
+        }
         isDone = false;
     }
     public void click4(View view){
@@ -90,8 +101,10 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("4");
-        else
+        else {
+            operationType = "none";
             resultBox.setText(resultBox.getText() + "4");
+        }
         isDone = false;
     }
     public void click5(View view){
@@ -99,8 +112,10 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("5");
-        else
+        else {
+            operationType = "none";
             resultBox.setText(resultBox.getText() + "5");
+        }
         isDone = false;
     }
     public void click6(View view){
@@ -108,8 +123,10 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("6");
-        else
+        else {
+            operationType = "none";
             resultBox.setText(resultBox.getText() + "6");
+        }
         isDone = false;
     }
     public void click7(View view){
@@ -117,8 +134,10 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("7");
-        else
+        else {
+            operationType = "none";
             resultBox.setText(resultBox.getText() + "7");
+        }
         isDone = false;
     }
     public void click8(View view){
@@ -126,8 +145,10 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("8");
-        else
+        else {
+            operationType = "none";
             resultBox.setText(resultBox.getText() + "8");
+        }
         isDone = false;
     }
     public void click9(View view){
@@ -135,8 +156,10 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("9");
-        else
+        else {
+            operationType = "none";
             resultBox.setText(resultBox.getText() + "9");
+        }
         isDone = false;
     }
     public void clickDot(View view){
@@ -160,6 +183,7 @@ public class SimpleCalc extends Activity implements Controlls {
         resultBox.setText("0");
         leftNumber = 0;
         operationType = "none";
+        rightNumber = 0;
         changeButtonsState(true);
     }
     public void clickC(View view){
@@ -210,40 +234,41 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         double result = 0;
 
+        if(!isDone)
+            rightNumber = Double.parseDouble(actualState);
+
         switch (operationType) {
             case "div":
                 if (Double.parseDouble(actualState) == 0) {
                     sendToast("You can't divide by 0");
                 } else {
-                    result = leftNumber / Double.parseDouble(actualState);
+                    result = leftNumber / rightNumber;
                 }
                 break;
             case "add":
-                result = leftNumber + Double.parseDouble(actualState);
+                result = leftNumber + rightNumber;
                 break;
             case "mul":
-                result = leftNumber * Double.parseDouble(actualState);
+                result = leftNumber * rightNumber;
                 break;
             case "sub":
-                result = leftNumber - Double.parseDouble(actualState);
+                result = leftNumber - rightNumber;
                 break;
         }
 
+
         leftNumber = result;
-        operationType = "none";
         resultBox.setText(String.valueOf(result));
         changeButtonsState(true);
         isDone = true;
     }
 
     public void changeButtonsState(boolean state) {
-        Button button0 = findViewById(R.id.equalsButton);
         Button button1 = findViewById(R.id.additionButton);
         Button button2 = findViewById(R.id.multiplyButton);
         Button button3 = findViewById(R.id.divideButton);
         Button button4 = findViewById(R.id.subtractionButton);
 
-        button0.setEnabled(!state);
         button1.setEnabled(state);
         button2.setEnabled(state);
         button3.setEnabled(state);

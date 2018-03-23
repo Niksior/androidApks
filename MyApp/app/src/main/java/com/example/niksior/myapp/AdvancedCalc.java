@@ -14,7 +14,6 @@ public class AdvancedCalc extends SimpleCalc implements Controlls {
     }
 
     public void changeButtonsState(boolean state) {
-        Button button0 = findViewById(R.id.equalsButton);
         Button button1 = findViewById(R.id.additionButton);
         Button button2 = findViewById(R.id.multiplyButton);
         Button button3 = findViewById(R.id.divideButton);
@@ -28,7 +27,6 @@ public class AdvancedCalc extends SimpleCalc implements Controlls {
         Button button11 = findViewById(R.id.cosButton);
         Button button12 = findViewById(R.id.sqrtButton);
 
-        button0.setEnabled(!state);
         button1.setEnabled(state);
         button2.setEnabled(state);
         button3.setEnabled(state);
@@ -48,31 +46,33 @@ public class AdvancedCalc extends SimpleCalc implements Controlls {
         String actualState = (String) resultBox.getText();
         double result = 0;
 
+        if(!isDone)
+            rightNumber = Double.parseDouble(actualState);
+
         switch (operationType) {
             case "div":
                 if (Double.parseDouble(actualState) == 0) {
                     sendToast("You can't divide by 0");
                 } else {
-                    result = leftNumber / Double.parseDouble(actualState);
+                    result = leftNumber / rightNumber;
                 }
                 break;
             case "add":
-                result = leftNumber + Double.parseDouble(actualState);
+                result = leftNumber + rightNumber;
                 break;
             case "mul":
-                result = leftNumber * Double.parseDouble(actualState);
+                result = leftNumber * rightNumber;
                 break;
             case "sub":
-                result = leftNumber - Double.parseDouble(actualState);
+                result = leftNumber - rightNumber;
                 break;
             case "powy":
-                result = Math.pow(leftNumber, Double.parseDouble(actualState));
+                result = Math.pow(leftNumber, rightNumber);
                 break;
 
         }
 
         leftNumber = result;
-        operationType = "none";
         resultBox.setText(String.valueOf(result));
         changeButtonsState(true);
         isDone = true;
