@@ -217,6 +217,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/powyButton"
             android:layout_below="@+id/powyButton"
+            android:onClick="clickCos"
             android:text="@string/cos" />
 
         <Button
@@ -226,6 +227,7 @@
             android:layout_alignBaseline="@+id/numberButton6"
             android:layout_alignBottom="@+id/numberButton6"
             android:layout_alignStart="@+id/sinButton"
+            android:onClick="clickPowy"
             android:text="@string/x_y" />
 
         <Button
@@ -234,6 +236,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/sinButton"
+            android:onClick="clickLog"
             android:text="@string/log"
             android:textAllCaps="false"
             android:textSize="18sp" />
@@ -244,6 +247,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/logButton"
             android:layout_toEndOf="@+id/numberButton2"
+            android:onClick="clickSqrt"
             android:text="@string/sqrt"
             android:textAllCaps="false"
             android:textSize="18sp" />
@@ -255,6 +259,7 @@
             android:layout_alignBaseline="@+id/numberButton5"
             android:layout_alignBottom="@+id/numberButton5"
             android:layout_toEndOf="@+id/numberButton5"
+            android:onClick="clickPow2"
             android:text="@string/x_2" />
 
         <Button
@@ -264,6 +269,7 @@
             android:layout_alignBaseline="@+id/numberButton9"
             android:layout_alignBottom="@+id/numberButton9"
             android:layout_toStartOf="@+id/numberButton9"
+            android:onClick="clickSin"
             android:text="@string/sin" />
 
         <Button
@@ -273,6 +279,7 @@
             android:layout_alignBaseline="@+id/clearButton"
             android:layout_alignBottom="@+id/clearButton"
             android:layout_toEndOf="@+id/clearButton"
+            android:onClick="clickLn"
             android:text="@string/ln"
             android:textAllCaps="false"
             android:textSize="18sp" />
@@ -284,6 +291,7 @@
             android:layout_alignBaseline="@+id/numberButton2"
             android:layout_alignBottom="@+id/numberButton2"
             android:layout_toEndOf="@+id/numberButton5"
+            android:onClick="clickTan"
             android:text="@string/tan"
             tools:layout_editor_absoluteX="149dp"
             tools:layout_editor_absoluteY="352dp" />

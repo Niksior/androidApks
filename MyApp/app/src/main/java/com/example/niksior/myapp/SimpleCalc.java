@@ -38,8 +38,9 @@ public class SimpleCalc extends Activity implements Controlls {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_simple_calc);
+        Button button0 = findViewById(R.id.equalsButton);
+        button0.setEnabled(false);
     }
 
     public void click0(View view){
@@ -47,7 +48,7 @@ public class SimpleCalc extends Activity implements Controlls {
         String actualState = (String) resultBox.getText();
         if(isDone)
             resultBox.setText("0");
-        if(actualState.length() > 1 || (actualState.indexOf('0') != 0 && actualState.length() == 1))
+        else if(actualState.length() > 1 || (actualState.indexOf('0') != 0 && actualState.length() == 1))
             resultBox.setText(resultBox.getText() + "0");
         isDone = false;
     }
@@ -145,6 +146,9 @@ public class SimpleCalc extends Activity implements Controlls {
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
         double tmp = Double.parseDouble(actualState) * -1;
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
+            resultBox.setText("0");
+        else
         resultBox.setText(String.valueOf(tmp));
     }
     public void clickClear(View view){
@@ -152,6 +156,7 @@ public class SimpleCalc extends Activity implements Controlls {
         resultBox.setText("0");
         leftNumber = 0;
         operationType = "none";
+        changeButtonsState(true);
     }
     public void clickC(View view){
         TextView resultBox = findViewById(R.id.resultBox);
@@ -204,10 +209,7 @@ public class SimpleCalc extends Activity implements Controlls {
         switch (operationType) {
             case "div":
                 if (Double.parseDouble(actualState) == 0) {
-                    Context context = getApplicationContext();
-                    CharSequence text = "You can't divide by 0!";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast.makeText(context, text, duration).show();
+                    sendToast("You can't divide by 0");
                 } else {
                     result = leftNumber / Double.parseDouble(actualState);
                 }
@@ -231,15 +233,23 @@ public class SimpleCalc extends Activity implements Controlls {
     }
 
     public void changeButtonsState(boolean state) {
+        Button button0 = findViewById(R.id.equalsButton);
         Button button1 = findViewById(R.id.additionButton);
         Button button2 = findViewById(R.id.multiplyButton);
         Button button3 = findViewById(R.id.divideButton);
         Button button4 = findViewById(R.id.subtractionButton);
 
+        button0.setEnabled(!state);
         button1.setEnabled(state);
         button2.setEnabled(state);
         button3.setEnabled(state);
         button4.setEnabled(state);
     }
 
+    public void sendToast(String message) {
+        Context context = getApplicationContext();
+        CharSequence text = message;
+        int duration = Toast.LENGTH_SHORT;
+        Toast.makeText(context, text, duration).show();
+    }
 }

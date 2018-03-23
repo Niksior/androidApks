@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import static java.lang.System.exit;
-
 public class MainActivity extends Activity {
 
     @Override
@@ -32,6 +30,6 @@ public class MainActivity extends Activity {
     }
 
     public void exitApp (View view) {
-        exit(1);
+        System.exit(0);
     }
 }

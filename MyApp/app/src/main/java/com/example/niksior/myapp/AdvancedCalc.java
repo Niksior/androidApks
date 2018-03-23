@@ -1,11 +1,9 @@
 package com.example.niksior.myapp;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AdvancedCalc extends SimpleCalc implements Controlls {
 
@@ -13,9 +11,12 @@ public class AdvancedCalc extends SimpleCalc implements Controlls {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_calc);
+        Button button0 = findViewById(R.id.equalsButton);
+        button0.setEnabled(false);
     }
 
     public void changeButtonsState(boolean state) {
+        Button button0 = findViewById(R.id.equalsButton);
         Button button1 = findViewById(R.id.additionButton);
         Button button2 = findViewById(R.id.multiplyButton);
         Button button3 = findViewById(R.id.divideButton);
@@ -29,6 +30,7 @@ public class AdvancedCalc extends SimpleCalc implements Controlls {
         Button button11 = findViewById(R.id.cosButton);
         Button button12 = findViewById(R.id.sqrtButton);
 
+        button0.setEnabled(!state);
         button1.setEnabled(state);
         button2.setEnabled(state);
         button3.setEnabled(state);
@@ -51,10 +53,7 @@ public class AdvancedCalc extends SimpleCalc implements Controlls {
         switch (operationType) {
             case "div":
                 if (Double.parseDouble(actualState) == 0) {
-                    Context context = getApplicationContext();
-                    CharSequence text = "You can't divide by 0!";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast.makeText(context, text, duration).show();
+                    sendToast("You can't divide by 0");
                 } else {
                     result = leftNumber / Double.parseDouble(actualState);
                 }
@@ -68,6 +67,10 @@ public class AdvancedCalc extends SimpleCalc implements Controlls {
             case "sub":
                 result = leftNumber - Double.parseDouble(actualState);
                 break;
+            case "powy":
+                result = Math.pow(leftNumber, Double.parseDouble(actualState));
+                break;
+
         }
 
         leftNumber = result;
@@ -77,5 +80,81 @@ public class AdvancedCalc extends SimpleCalc implements Controlls {
         isDone = true;
     }
 
+    public void clickSqrt(View view) {
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        leftNumber = Double.parseDouble(actualState);
+        if(leftNumber < 0)
+            sendToast("It can't be negative number");
+        else
+            leftNumber = Math.sqrt(leftNumber);
+        resultBox.setText(String.valueOf(leftNumber));
+        changeButtonsState(true);
+        isDone = true;
+    }
 
+    public void clickSin(View view) {
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        leftNumber = Double.parseDouble(actualState);
+        resultBox.setText(String.valueOf(Math.sin(leftNumber)));
+        changeButtonsState(true);
+        isDone = true;
+    }
+    public void clickCos(View view) {
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        leftNumber = Double.parseDouble(actualState);
+        resultBox.setText(String.valueOf(Math.cos(leftNumber)));
+        changeButtonsState(true);
+        isDone = true;
+    }
+    public void clickTan(View view) {
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        leftNumber = Double.parseDouble(actualState);
+        resultBox.setText(String.valueOf(Math.tan(leftNumber)));
+        changeButtonsState(true);
+        isDone = true;
+    }
+    public void clickPow2(View view) {
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        leftNumber = Double.parseDouble(actualState);
+        resultBox.setText(String.valueOf(Math.pow(leftNumber, 2)));
+        changeButtonsState(true);
+        isDone = true;
+    }
+    public void clickPowy(View view) {
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        operationType = "powy";
+        leftNumber = Double.parseDouble(actualState);
+        resultBox.setText("0");
+        changeButtonsState(false);
+        isDone = false;
+    }
+    public void clickLog(View view) {
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        leftNumber = Double.parseDouble(actualState);
+        if(leftNumber <= 0)
+            sendToast("Number must be positive");
+        else
+            resultBox.setText(String.valueOf(Math.log10(leftNumber)));
+        changeButtonsState(true);
+        isDone = true;
+    }
+    public void clickLn(View view) {
+        TextView resultBox = findViewById(R.id.resultBox);
+        String actualState = (String) resultBox.getText();
+        leftNumber = Double.parseDouble(actualState);
+        if(leftNumber <= 0)
+            sendToast("Number must be positive");
+        else
+            resultBox.setText(String.valueOf(Math.log(leftNumber)));
+        changeButtonsState(true);
+        changeButtonsState(true);
+        isDone = true;
+    }
 }
