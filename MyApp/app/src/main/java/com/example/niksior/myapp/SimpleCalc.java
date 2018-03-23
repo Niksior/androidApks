@@ -13,6 +13,7 @@ public class SimpleCalc extends Activity {
     private double leftNumber = 0;
     private String savedState = "0";
     private String operationType = "none";
+    private boolean isDone = false;
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -44,82 +45,94 @@ public class SimpleCalc extends Activity {
     public void click0(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
+        if(isDone)
+            resultBox.setText("0");
         if(actualState.length() > 1 || (actualState.indexOf('0') != 0 && actualState.length() == 1))
             resultBox.setText(resultBox.getText() + "0");
+        isDone = false;
     }
 
     public void click1(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("1");
         else
             resultBox.setText(resultBox.getText() + "1");
+        isDone = false;
     }
 
     public void click2(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("2");
         else
             resultBox.setText(resultBox.getText() + "2");
+        isDone = false;
     }
     public void click3(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("3");
         else
             resultBox.setText(resultBox.getText() + "3");
+        isDone = false;
     }
     public void click4(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("4");
         else
             resultBox.setText(resultBox.getText() + "4");
+        isDone = false;
     }
     public void click5(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("5");
         else
             resultBox.setText(resultBox.getText() + "5");
+        isDone = false;
     }
     public void click6(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("6");
         else
             resultBox.setText(resultBox.getText() + "6");
+        isDone = false;
     }
     public void click7(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("7");
         else
             resultBox.setText(resultBox.getText() + "7");
+        isDone = false;
     }
     public void click8(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("8");
         else
             resultBox.setText(resultBox.getText() + "8");
+        isDone = false;
     }
     public void click9(View view){
         TextView resultBox = findViewById(R.id.resultBox);
         String actualState = (String) resultBox.getText();
-        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0)
+        if(actualState.length() == 1 && Double.parseDouble(actualState) == 0 || isDone)
             resultBox.setText("9");
         else
             resultBox.setText(resultBox.getText() + "9");
+        isDone = false;
     }
     public void clickDot(View view){
         TextView resultBox = findViewById(R.id.resultBox);
@@ -214,6 +227,7 @@ public class SimpleCalc extends Activity {
         operationType = "none";
         resultBox.setText(String.valueOf(result));
         changeButtonsState(true);
+        isDone = true;
     }
 
     private void changeButtonsState(boolean state) {

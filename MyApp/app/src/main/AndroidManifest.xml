@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SimpleCalc" />
-        <activity android:name=".Credits"></activity>
+        <activity android:name=".Credits" />
+        <activity android:name=".AdvancedCalc"></activity>
     </application>
 
 </manifest>
