@@ -9,16 +9,18 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MyViewModel myViewModel;
     private EditText editText;
 
+    private MyViewModel myViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        editText =  findViewById(R.id.text);
+
         myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
+
+        editText =  findViewById(R.id.text);
         TextView textView = findViewById(R.id.textView2);
         textView.setText(myViewModel.getString());
     }
