@@ -14,7 +14,7 @@ public class MoonFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.activity_sun_fragment, container, false);
+                R.layout.activity_moon_fragment, container, false);
 
         return rootView;
     }

@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Astro</string>
+    <string name="moon_background">moon_background</string>
+    <string name="sun_image">sun_image</string>
+    <string name="wsch_d">Wschód</string>
+    <string name="zach_d">Zachód</string>
+    <string name="azymut_wschodu">Azymut wschodu</string>
+    <string name="azymut_zachodu">Azymut zachodu</string>
+    <string name="wit">Świt</string>
+    <string name="zmierzch">Zmierzch</string>
+    <string name="n_w">Nów</string>
+    <string name="pe_nia">Pełnia</string>
+    <string name="faza">Faza</string>
+    <string name="dzie">Dzień</string>
+    <string name="zegar">Zegar</string>
+    <string name="szeroko">Szerokość</string>
+    <string name="wysoko">Wysokość</string>
 </resources>
