@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     PagerAdapter pagerAdapter;
+    SharedPreferences sharedPreferences;
+    private final String filename = "info";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager1);
         pagerAdapter = new BasicPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+        sharedPreferences = getSharedPreferences(filename, 0);
+
+        ustawUstawienia();
 
         thread = new Thread() {
 
@@ -56,22 +61,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void pokazDane() {
-        SharedPreferences sharedPreferences = getSharedPreferences("info.xml", 0);
-        textWys.setText(sharedPreferences.getString("Wys", String.valueOf(51.5873166)));
-        textSzer.setText(sharedPreferences.getString("szer", String.valueOf(19.7543569)));
+
+        textWys.setText(sharedPreferences.getString("wys", null));
+        textSzer.setText(sharedPreferences.getString("sze", null));
     }
 
-    @Override
-    public void onStop() {
-        thread.interrupt();
-        super.onStop();
+    private void ustawUstawienia() {
+//        51.5873166;
+//        19.7543569;
+        if(!sharedPreferences.getBoolean("firstLaunch", false)){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("firstLaunch", true);
+            editor.putString("wys", "51.5873166");
+            editor.putString("sze", "19.7543569");
+            editor.putString("ods", "1");
+            editor.apply();
+        }
+
     }
 
-    @Override
-    public void onRestart() {
-        pokazDane();
-        super.onRestart();
-    }
+//    @Override
+//    public void onStop() {
+//        thread.interrupt();
+//        super.onStop();
+//    }
+//
+//    @Override
+//    public void onRestart() {
+//        pokazDane();
+//        super.onRestart();
+//    }
 
 
 
