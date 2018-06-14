@@ -25,4 +25,8 @@
     <string name="szukanie_miastem">Szukanie miastem</string>
     <string name="ustawienia">Ustawienia</string>
     <string name="jednostki">Jednostki</string>
+    <string name="celsjusz">Celsjusz</string>
+    <string name="farenheit">Farenheit</string>
+    <string name="kilometry">Kilometry</string>
+    <string name="mile">Mile</string>
 </resources>

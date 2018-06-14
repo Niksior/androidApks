@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         viewPager = findViewById(R.id.viewPager1);
         Configuration configuration = getResources().getConfiguration();
 
-        if(!czyTablet(configuration)) {
+        if (!czyTablet(configuration)) {
             pagerAdapter = new BasicPagerAdapter(getSupportFragmentManager());
             viewPager.setAdapter(pagerAdapter);
         }
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 
         YahooWeatherService yahooWeatherService = new YahooWeatherService(this, cityToSearch, optionSetting, latitudeSend, longitudeSend);
         yahooWeatherService.refreshWeather();
-        sharedWeatherPreferences = getSharedPreferences("weather.xml", 0);
+        sharedWeatherPreferences = getSharedPreferences("weather", 0);
     }
 
     private void pokazDane() {
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     }
 
     private void ustawUstawienia() {
-        if(!sharedPreferences.getBoolean("firstLaunch", false)){
+        if (!sharedPreferences.getBoolean("firstLaunch", false)) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("firstLaunch", true);
             editor.putString("wys", "51.5873166");
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.settingsButton:
                 startActivity(new Intent(this, Settings.class));
                 return true;
