@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.nio.DoubleBuffer;
+
 public class Settings extends AppCompatActivity {
 
     TextView szerInput, wysInput, odswInput;
@@ -48,74 +50,27 @@ public class Settings extends AppCompatActivity {
         zapisz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String saveTo;
-                String checkValue;
-
-                checkValue = String.valueOf(szerInput.getText());
-                saveTo = "Latitude";
-                checkValues(checkValue, sharedPreferences, 90, -90, saveTo);
-
-                checkValue = String.valueOf(wysInput.getText());
-                saveTo = "Longitude";
-                checkValues(checkValue, sharedPreferences, 180, -180, saveTo);
-
-                checkRefresh();
-
-                Toast.makeText(Settings.this, "Saved values!", Toast.LENGTH_SHORT).show();
+                try{
+                    Double tmp = Double.parseDouble(String.valueOf(szerInput.getText()));
+                    Double tmp2 = Double.parseDouble(String.valueOf(wysInput.getText()));
+                    int tmp3 = Integer.parseInt(String.valueOf(odswInput.getText()));
+                    if((tmp > 90 || tmp < -90) || (tmp2 > 180 || tmp2 < -180) || tmp3 < 1) {
+                        Toast.makeText(Settings.this, "Wrong numbers!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("wys", String.valueOf(wysInput.getText()));
+                        editor.putString("sze", String.valueOf(szerInput.getText()));
+                        editor.putString("ods", String.valueOf(odswInput.getText()));
+                        editor.apply();
+                        Toast.makeText(Settings.this, "Saved values!", Toast.LENGTH_SHORT).show();
+                    }
+                }   catch (Exception e) {
+                    Toast.makeText(Settings.this, "Wrong numbers!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
     }
 
-
-    public void checkValues(String checkValue, SharedPreferences sharedPref, int checkUpper, int checkLower, String saveTo){
-        if(checkValue.equals("") ){
-            Toast.makeText(Settings.this, "One of the values is empty!", Toast.LENGTH_SHORT).show();
-        }
-        else if(checkValue.endsWith(".")){
-            checkValue = checkValue.substring(0, checkValue.length() - 1);
-            szerInput.setText(checkValue);
-        }
-        else if(checkValue.matches("\\d+(?:\\.\\d+)?")){                                                                    //regex for latitude/longitude
-            if((Double.valueOf(checkValue) <= checkUpper) && (Double.valueOf(checkValue) >= checkLower)){
-                SharedPreferences.Editor edit = sharedPref.edit();
-                if(saveTo.equals("Latitude")){
-                    edit.putString("Latitude", checkValue);
-                    edit.commit();
-                }
-                else if(saveTo.equals("Longitude")){
-                    edit.putString("Longitude", checkValue);
-                    edit.commit();
-                }
-            }
-            else{
-                Toast.makeText(Settings.this, "One of given values is bad!", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else{
-            Toast.makeText(Settings.this, "One of given values is bad!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void checkRefresh(){
-        String refresh = String.valueOf(odswInput.getText());
-        if (refresh.equals("")) {
-            Toast.makeText(Settings.this, "One of give values is bad!", Toast.LENGTH_SHORT).show();
-        } else if (refresh.endsWith(".")) {
-            refresh = refresh.substring(0, refresh.length() - 1);
-            odswInput.setText(refresh);
-        } else if (refresh.matches("^[1-9]\\d*$")) {                                                                        //regex for timer
-            if ((Integer.valueOf(refresh) <= 60) && (Integer.valueOf(refresh) >= 1)) {
-                SharedPreferences sharedPref = getSharedPreferences("infoValues.xml", 0);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("Refresh", refresh);
-                editor.commit();
-            } else {
-                Toast.makeText(Settings.this, "Bad value in Minutes (1 : 60)!", Toast.LENGTH_SHORT).show();
-
-            }
-        } else {
-            Toast.makeText(Settings.this, "Bad value format in Minutes (1 : 60)!", Toast.LENGTH_SHORT).show();
-        }
-    }
 }

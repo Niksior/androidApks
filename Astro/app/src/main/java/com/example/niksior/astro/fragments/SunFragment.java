@@ -49,7 +49,7 @@ public class SunFragment extends Fragment {
                 try {
 
                     while (!isInterrupted()) {
-                        getRefreshTime();
+                        refresh();
                         Thread.sleep(refreshTime*1000);
                         if(getActivity() != null){
                             getActivity().runOnUiThread(new Runnable() {
@@ -77,23 +77,30 @@ public class SunFragment extends Fragment {
         swit.setText( astroCalculator.getSunInfo().getTwilightMorning().toString());
     }
 
-    public void getRefreshTime(){
+    public void refresh(){
         if(getActivity() != null){
+            astroCalculator = new AstroInit(sharedPreferences).getAstroCalculator();
             refreshTime = Integer.valueOf(sharedPreferences.getString("ods", null));
         }
     }
 
     @Override
-    public void onStop(){
-        getRefreshTime();
-        super.onStop();
+    public void onResume() {
+        refresh();
+        super.onResume();
     }
 
-    @Override
-    public void onStart() {
-        astroCalculator = new AstroInit(sharedPreferences).getAstroCalculator();
-        super.onStart();
-    }
+//    @Override
+//    public void onStop(){
+//        getRefreshTime();
+//        super.onStop();
+//    }
+//
+//    @Override
+//    public void onStart() {
+//
+//        super.onStart();
+//    }
 
 
 }

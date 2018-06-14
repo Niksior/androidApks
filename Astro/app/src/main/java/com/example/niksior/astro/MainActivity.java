@@ -108,12 +108,12 @@ public class MainActivity extends AppCompatActivity {
 //        thread.interrupt();
 //        super.onStop();
 //    }
-//
-//    @Override
-//    public void onRestart() {
-//        pokazDane();
-//        super.onRestart();
-//    }
+
+    @Override
+    public void onRestart() {
+        pokazDane();
+        super.onRestart();
+    }
 
 
 

@@ -51,7 +51,7 @@ public class MoonFragment extends Fragment {
                 try {
 
                     while (!isInterrupted()) {
-                        getRefreshTime();
+                        refresh();
                         Thread.sleep(refreshTime*1000);
                         if(getActivity() != null){
                             getActivity().runOnUiThread(new Runnable() {
@@ -82,21 +82,27 @@ public class MoonFragment extends Fragment {
         dzien.setText( String.valueOf(astroCalculator.getMoonInfo().getAge()));
     }
 
-    public void getRefreshTime(){
+    public void refresh(){
         if(getActivity() != null){
+            astroCalculator = new AstroInit(sharedPreferences).getAstroCalculator();
             refreshTime = Integer.valueOf(sharedPreferences.getString("ods", null));
         }
     }
 
-    @Override
-    public void onStop(){
-        getRefreshTime();
-        super.onStop();
-    }
+//    @Override
+//    public void onStop(){
+//        getRefreshTime();
+//        super.onStop();
+//    }
 
     @Override
-    public void onStart() {
-        astroCalculator = new AstroInit(sharedPreferences).getAstroCalculator();
-        super.onStart();
+    public void onResume() {
+        refresh();
+        super.onResume();
     }
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//    }
 }
