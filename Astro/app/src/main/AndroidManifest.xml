@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Settings" />
-        <activity android:name=".fragments.WeatherFragment"></activity>
+        <activity android:name=".fragments.WeatherFragment" />
+        <activity android:name=".UnitSettings"></activity>
     </application>
 
 </manifest>

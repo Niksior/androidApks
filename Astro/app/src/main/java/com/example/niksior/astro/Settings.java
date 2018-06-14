@@ -1,5 +1,6 @@
 package com.example.niksior.astro;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -105,6 +106,10 @@ public class Settings extends AppCompatActivity {
             case R.id.exitButton:
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);
+                return true;
+
+            case R.id.unitsButton:
+                startActivity(new Intent(this, UnitSettings.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);

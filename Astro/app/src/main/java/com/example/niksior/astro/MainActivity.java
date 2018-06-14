@@ -170,6 +170,9 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
                 System.exit(1);
                 return true;
 
+            case R.id.unitsButton:
+                startActivity(new Intent(this, UnitSettings.class));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
