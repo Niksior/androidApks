@@ -19,4 +19,10 @@
     <string name="exit">Exit</string>
     <string name="od_wie_anie">Odświeżanie</string>
     <string name="zapisz">Zapisz</string>
+    <string name="wysoka">Wysoka</string>
+    <string name="niska">Niska</string>
+    <string name="miasto">Miasto</string>
+    <string name="szukanie_miastem">Szukanie miastem</string>
+    <string name="ustawienia">Ustawienia</string>
+    <string name="jednostki">Jednostki</string>
 </resources>

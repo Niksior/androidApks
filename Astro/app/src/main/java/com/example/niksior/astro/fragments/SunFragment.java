@@ -34,7 +34,7 @@ public class SunFragment extends Fragment {
 
         wschod = rootView.findViewById(R.id.wschod);
         zachod = rootView.findViewById(R.id.zachod);
-        azWschod = rootView.findViewById(R.id.az_wschod);;
+        azWschod = rootView.findViewById(R.id.az_wschod);
         azZachod = rootView.findViewById(R.id.az_zach);
         swit = rootView.findViewById(R.id.swit);
         zmierzch = rootView.findViewById(R.id.zmierch);

@@ -2,6 +2,7 @@ package com.example.niksior.astro;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -9,17 +10,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.niksior.astro.data.Atmosphere;
+import com.example.niksior.astro.data.Channel;
+import com.example.niksior.astro.data.Item;
+import com.example.niksior.astro.data.Location;
+import com.example.niksior.astro.data.Wind;
+import com.example.niksior.astro.service.WeatherServiceCallback;
+import com.example.niksior.astro.service.YahooWeatherService;
 
 import java.text.SimpleDateFormat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WeatherServiceCallback {
 
     TextView textWys, textSzer;
     Thread thread;
 
     ViewPager viewPager;
     PagerAdapter pagerAdapter;
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences, sharedWeatherPreferences;
     private final String filename = "info";
 
     @Override
@@ -27,8 +37,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewPager = findViewById(R.id.viewPager1);
-        pagerAdapter = new BasicPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
+        Configuration configuration = getResources().getConfiguration();
+
+        if(!czyTablet(configuration)) {
+            pagerAdapter = new BasicPagerAdapter(getSupportFragmentManager());
+            viewPager.setAdapter(pagerAdapter);
+        }
         sharedPreferences = getSharedPreferences(filename, 0);
 
         ustawUstawienia();
@@ -61,6 +75,18 @@ public class MainActivity extends AppCompatActivity {
         textWys = findViewById(R.id.textWys);
 
         pokazDane();
+        ustawPogode();
+    }
+
+    private void ustawPogode() {
+        String cityToSearch = sharedPreferences.getString("miasto", null);
+        String optionSetting = sharedPreferences.getString("szukanie_miastem", null);
+        String latitudeSend = sharedPreferences.getString("wys", null);
+        String longitudeSend = sharedPreferences.getString("sze", null);
+
+        YahooWeatherService yahooWeatherService = new YahooWeatherService(this, cityToSearch, optionSetting, latitudeSend, longitudeSend);
+        yahooWeatherService.refreshWeather();
+        sharedWeatherPreferences = getSharedPreferences("weather.xml", 0);
     }
 
     private void pokazDane() {
@@ -76,9 +102,54 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("wys", "51.5873166");
             editor.putString("sze", "19.7543569");
             editor.putString("ods", "1");
+            editor.putString("miasto", "Lodz");
+            editor.putString("szukanie_miastem", "1");
             editor.apply();
         }
+    }
 
+    public boolean czyTablet(Configuration config) {
+        boolean xlarge = ((config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);
+        boolean large = ((config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE);
+        return (xlarge || large);
+    }
+
+    @Override
+    public void serviceSuccess(Channel channel) {
+        Item item = channel.getItem();
+        Location location = channel.getLocation();
+        Atmosphere atmosphere = channel.getAtmosphere();
+        Wind wind = channel.getWind();
+        SharedPreferences.Editor editor = sharedWeatherPreferences.edit();
+
+        editor.putString("miasto", location.getCity());
+        editor.putString("kraj", location.getCountry());
+        editor.putString("kierunek_wiatru", wind.getDirection());
+        editor.putString("predkosc_wiatru", wind.getSpeed());
+        editor.putString("wilgotnosc", atmosphere.getHumidity());
+        editor.putString("cisnienie", atmosphere.getPressure());
+        editor.putString("szer", item.getLongitude());
+        editor.putString("wys", item.getLatitude());
+        editor.putString("widocznosc", atmosphere.getVisibility());
+        editor.putString("aktualny_obrazek", item.getCondition().getCode());
+        editor.putString("aktualna_temperatura", item.getCondition().getTemperature());
+        editor.putString("aktualny_opis", item.getCondition().getDescription());
+
+        for (int i = 0; i < 3; i++) {
+            editor.putString("kod_obrazku_" + i, item.getForecast(i).getCodeImage());
+            editor.putString("dzien_" + i, item.getForecast(i).getDay());
+            editor.putString("temp_maks_" + i, item.getForecast(i).getHighTemperature());
+            editor.putString("temp_min_" + i, item.getForecast(i).getLowTemperature());
+            editor.putString("opis_" + i, item.getForecast(i).getDescription());
+        }
+        editor.apply();
+
+        pokazDane();
+    }
+
+    @Override
+    public void serviceFailure(Exception exception) {
+        Toast.makeText(MainActivity.this, "No internet connection!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -103,18 +174,24 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    @Override
-//    public void onStop() {
-//        thread.interrupt();
-//        super.onStop();
-//    }
+    @Override
+    public void onStop() {
+        thread.interrupt();
+        super.onStop();
+    }
 
     @Override
     public void onRestart() {
         pokazDane();
+        ustawPogode();
         super.onRestart();
     }
 
-
+    @Override
+    public void onResume() {
+        pokazDane();
+        ustawPogode();
+        super.onResume();
+    }
 
 }
