@@ -21,7 +21,8 @@
         <activity android:name=".Settings" />
         <activity android:name=".UnitSettings" />
         <activity android:name=".fragments.MoreWeatherFragment" />
-        <activity android:name=".fragments.ExtendedWeatherFragment"></activity>
+        <activity android:name=".fragments.ExtendedWeatherFragment" />
+        <activity android:name=".UlubioneActivity"></activity>
     </application>
 
 </manifest>

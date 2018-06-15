@@ -24,8 +24,7 @@
             <RadioGroup
                 android:id="@+id/unitGroup"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:checkedButton="@+id/celRadio">
+                android:layout_height="match_parent">
 
                 <RadioButton
                     android:id="@+id/celRadio"
@@ -52,8 +51,7 @@
             <RadioGroup
                 android:id="@+id/unit2Group"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:checkedButton="@+id/kmRadio">
+                android:layout_height="match_parent">
 
                 <RadioButton
                     android:id="@+id/kmRadio"

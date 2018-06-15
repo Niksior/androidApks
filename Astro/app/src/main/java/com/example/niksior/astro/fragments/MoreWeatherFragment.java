@@ -18,18 +18,18 @@ import java.util.Objects;
 
 public class MoreWeatherFragment extends Fragment {
 
-    private TextView[] maxTemp = new TextView[4];
-    private TextView[] minTemp = new TextView[4];
-    private ImageView[] dayView = new ImageView[4];
-    private TextView[] dayText = new TextView[4];
+    private TextView[] maxTemp = new TextView[3];
+    private TextView[] minTemp = new TextView[3];
+    private ImageView[] dayView = new ImageView[3];
+    private TextView[] dayText = new TextView[3];
 
 
     private SharedPreferences sharedPreferences;
-    private int resource[] = new int[4];
+    private int resource[] = new int[3];
 
     private String temperatureSettings;
     private String temperatureUnit;
-    private Drawable[] weatherIconDrawables = new Drawable[4];
+    private Drawable[] weatherIconDrawables = new Drawable[3];
 
 
     @Override
@@ -53,7 +53,7 @@ public class MoreWeatherFragment extends Fragment {
         sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences("weather", 0);
         temperatureSettings = sharedPreferences.getString("j_temp", "F");
         for(int i=0; i<3; i++){
-            resource[i] = getResources().getIdentifier("icon_" + sharedPreferences.getString("image_code_" + (i + 1), "1"), "drawable", Objects.requireNonNull(getContext()).getPackageName());
+            resource[i] = getResources().getIdentifier("icon_" + sharedPreferences.getString("icon_" + (i + 1), "1"), "drawable", Objects.requireNonNull(getContext()).getPackageName());
             weatherIconDrawables[i] = getResources().getDrawable(resource[i], null);
             maxTemp[i].setText(String.format("%s%s", zmienJednostke(sharedPreferences.getString("temp_maks_" + (i + 1), "1")), temperatureUnit));
             minTemp[i].setText(String.format("%s%s", zmienJednostke(sharedPreferences.getString("temp_min_" + (i + 1), "1")), temperatureUnit));

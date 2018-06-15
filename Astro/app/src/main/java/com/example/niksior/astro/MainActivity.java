@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         editor.putString("aktualna_temperatura", item.getCondition().getTemperature());
         editor.putString("aktualny_opis", item.getCondition().getDescription());
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 1; i < 4; i++) {
             editor.putString("icon_" + i, item.getForecast(i).getCodeImage());
             editor.putString("dzien_" + i, item.getForecast(i).getDay());
             editor.putString("temp_maks_" + i, item.getForecast(i).getHighTemperature());
@@ -173,6 +173,9 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
             case R.id.unitsButton:
                 startActivity(new Intent(this, UnitSettings.class));
                 return true;
+
+            case R.id.ulubioneButton:
+                startActivity(new Intent(this, UlubioneActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -180,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     @Override
     public void onStop() {
         thread.interrupt();
+        ustawPogode();
         super.onStop();
     }
 

@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 public class Item implements JSONPopulator {
 
-    private static final int NUMBER_OF_DAYS = 3;
+    private static final int NUMBER_OF_DAYS = 4;
     private Condition condition;
     private Forecast[] forecast;
     private JSONArray jsonArray;

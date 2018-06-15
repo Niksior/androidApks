@@ -101,6 +101,7 @@ public class Settings extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settingsButton:
+                startActivity(new Intent(this, Settings.class));
                 return true;
 
             case R.id.exitButton:
@@ -111,6 +112,9 @@ public class Settings extends AppCompatActivity {
             case R.id.unitsButton:
                 startActivity(new Intent(this, UnitSettings.class));
                 return true;
+
+            case R.id.ulubioneButton:
+                startActivity(new Intent(this, UlubioneActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

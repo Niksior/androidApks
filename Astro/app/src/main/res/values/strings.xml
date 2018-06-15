@@ -34,4 +34,7 @@
     <string name="ci_nienie">Ciśnienie</string>
     <string name="opis">Opis</string>
     <string name="textview">TextView</string>
+    <string name="name">Name</string>
+    <string name="ulubione">Ulubione</string>
+    <string name="zamknij">Zamknij</string>
 </resources>
