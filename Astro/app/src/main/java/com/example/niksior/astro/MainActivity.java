@@ -124,22 +124,33 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 
         editor.putString("miasto", location.getCity());
         editor.putString("kraj", location.getCountry());
+
         editor.putString("kierunek_wiatru", wind.getDirection());
         editor.putString("predkosc_wiatru", wind.getSpeed());
+
         editor.putString("wilgotnosc", atmosphere.getHumidity());
+
         editor.putString("cisnienie", atmosphere.getPressure());
+
         editor.putString("szer", item.getLongitude());
         editor.putString("wys", item.getLatitude());
+
         editor.putString("widocznosc", atmosphere.getVisibility());
+
         editor.putString("aktualny_obrazek", item.getCondition().getCode());
+
         editor.putString("aktualna_temperatura", item.getCondition().getTemperature());
+
         editor.putString("aktualny_opis", item.getCondition().getDescription());
 
         for (int i = 1; i < 4; i++) {
             editor.putString("icon_" + i, item.getForecast(i).getCodeImage());
+
             editor.putString("dzien_" + i, item.getForecast(i).getDay());
+
             editor.putString("temp_maks_" + i, item.getForecast(i).getHighTemperature());
             editor.putString("temp_min_" + i, item.getForecast(i).getLowTemperature());
+
             editor.putString("opis_" + i, item.getForecast(i).getDescription());
         }
         editor.apply();
@@ -149,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 
     @Override
     public void serviceFailure(Exception exception) {
-        Toast.makeText(MainActivity.this, "No internet connection!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Brak internetu lub brak pogody dla lokalizacji", Toast.LENGTH_SHORT).show();
     }
 
     @Override

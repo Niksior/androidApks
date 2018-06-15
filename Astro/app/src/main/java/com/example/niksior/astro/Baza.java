@@ -39,15 +39,6 @@ public class Baza extends SQLiteOpenHelper {
         }
     }
 
-    public boolean deleteData(String ulub) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        if (db.delete(tableName, "ULUBIONE=?", new String[]{ulub}) == -1) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     public Cursor getListContents() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT * FROM " + tableName, null);

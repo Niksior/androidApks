@@ -37,8 +37,14 @@ public class UlubioneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ulubione);
 
-        initElements();
-        displayCityList();
+        ulubInput = findViewById(R.id.ulubInput);
+        listView = findViewById(R.id.ulubList);
+        cityList = new ArrayList<>();
+        database = new Baza(this);
+        ulubButton = findViewById(R.id.ulubButton);
+        sharedPref = getSharedPreferences("info", 0);
+
+        wyswietl();
 
         ulubButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,9 +52,9 @@ public class UlubioneActivity extends AppCompatActivity {
                 String cityName = ulubInput.getText().toString();
                 if (ulubInput.length() != 0) {
                     if (!cityList.contains(cityName)) {
-                        addData(cityName);
+                        dodajDoBazy(cityName);
                         ulubInput.setText("");
-                        displayCityList();
+                        wyswietl();
                     } else {
                         Toast.makeText(UlubioneActivity.this, "Miasto już dodane", LENGTH_SHORT).show();
                     }
@@ -57,7 +63,6 @@ public class UlubioneActivity extends AppCompatActivity {
                 }
             }
         });
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -67,19 +72,9 @@ public class UlubioneActivity extends AppCompatActivity {
                 edit.apply();
             }
         });
-
     }
 
-    private void initElements() {
-        ulubInput = findViewById(R.id.ulubInput);
-        listView = findViewById(R.id.ulubList);
-        cityList = new ArrayList<>();
-        database = new Baza(this);
-        ulubButton = findViewById(R.id.ulubButton);
-        sharedPref = getSharedPreferences("info", 0);
-    }
-
-    private void displayCityList() {
+    private void wyswietl() {
         data = database.getListContents();
         cityList.clear();
         while (data.moveToNext()) {
@@ -90,10 +85,8 @@ public class UlubioneActivity extends AppCompatActivity {
         registerForContextMenu(listView);
     }
 
-    public void addData(String record) {
-        boolean result = database.insertData(record);
-
-        if (result) {
+    public void dodajDoBazy(String record) {
+        if (database.insertData(record)) {
             Toast.makeText(UlubioneActivity.this, "Zapisano", LENGTH_SHORT).show();
         } else {
             Toast.makeText(UlubioneActivity.this, "Błąd", LENGTH_SHORT).show();

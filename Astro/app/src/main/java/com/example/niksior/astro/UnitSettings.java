@@ -20,7 +20,6 @@ public class UnitSettings extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("weather", 0);
 
-
         unitGroup = findViewById(R.id.unitGroup);
         unit2Group = findViewById(R.id.unit2Group);
         celRadio = findViewById(R.id.celRadio);
