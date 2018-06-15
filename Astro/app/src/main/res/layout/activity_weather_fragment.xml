@@ -6,61 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".fragments.WeatherFragment">
 
-    <ImageView
-        android:id="@+id/weatherIconImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="375dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/icon_na"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/dayTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
-        android:layout_marginEnd="147dp"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="14dp"
-        android:text="@string/dzie"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/highTemperatureTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherIconImageView" />
+        <ImageView
+            android:id="@+id/ikonaPogody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:src="@drawable/icon_na" />
 
-    <TextView
-        android:id="@+id/highTemperatureTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:layout_marginEnd="157dp"
-        android:layout_marginStart="163dp"
-        android:layout_marginTop="6dp"
-        android:text="@string/wysoka"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/lowTemperatureTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayTextView" />
+        <TextView
+            android:id="@+id/miastoTekst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="@string/miasto" />
 
-    <TextView
-        android:id="@+id/lowTemperatureTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="253dp"
-        android:layout_marginEnd="187dp"
-        android:layout_marginStart="163dp"
-        android:layout_marginTop="11dp"
-        android:text="@string/niska"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/highTemperatureTextView" />
+        <TextView
+            android:id="@+id/krajTekst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="@string/kraj" />
+
+        <TextView
+            android:id="@+id/tempTekst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="@string/temp" />
+
+        <TextView
+            android:id="@+id/cisnienieTekst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="@string/ci_nienie" />
+
+        <TextView
+            android:id="@+id/opisTekst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="@string/opis" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.01"
+            android:src="@drawable/yahoo_logo" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

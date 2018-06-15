@@ -19,7 +19,7 @@ public class UnitSettings extends AppCompatActivity {
         setContentView(R.layout.activity_unit_settings);
 
         sharedPreferences = getSharedPreferences("weather", 0);
-        editor = sharedPreferences.edit();
+
 
         unitGroup = findViewById(R.id.unitGroup);
         unit2Group = findViewById(R.id.unit2Group);
@@ -34,12 +34,13 @@ public class UnitSettings extends AppCompatActivity {
         unitGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                editor = sharedPreferences.edit();
                 switch (checkedId) {
                     case R.id.celRadio:
-                        editor.putString("j_temp", "0");
+                        editor.putString("j_temp", "C");
                         break;
                     case R.id.farRadio :
-                        editor.putString("j_temp", "1");
+                        editor.putString("j_temp", "F");
                         break;
                 }
                 editor.apply();
@@ -49,12 +50,13 @@ public class UnitSettings extends AppCompatActivity {
         unit2Group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                editor = sharedPreferences.edit();
                 switch (checkedId) {
                     case R.id.kmRadio:
-                        editor.putString("j_pred", "0");
+                        editor.putString("j_pred", "K");
                         break;
                     case R.id.milRadio:
-                        editor.putString("j_pred", "1");
+                        editor.putString("j_pred", "M");
                         break;
                 }
                 editor.apply();

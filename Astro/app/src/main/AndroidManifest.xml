@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".Settings" />
         <activity android:name=".UnitSettings" />
+        <activity android:name=".fragments.MoreWeatherFragment"></activity>
     </application>
 
 </manifest>

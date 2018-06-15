@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         editor.putString("aktualny_opis", item.getCondition().getDescription());
 
         for (int i = 0; i < 3; i++) {
-            editor.putString("kod_obrazku_" + i, item.getForecast(i).getCodeImage());
+            editor.putString("icon_" + i, item.getForecast(i).getCodeImage());
             editor.putString("dzien_" + i, item.getForecast(i).getDay());
             editor.putString("temp_maks_" + i, item.getForecast(i).getHighTemperature());
             editor.putString("temp_min_" + i, item.getForecast(i).getLowTemperature());

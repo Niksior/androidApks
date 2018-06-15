@@ -29,4 +29,8 @@
     <string name="farenheit">Farenheit</string>
     <string name="kilometry">Kilometry</string>
     <string name="mile">Mile</string>
+    <string name="kraj">Kraj</string>
+    <string name="temp">Temp</string>
+    <string name="ci_nienie">Ciśnienie</string>
+    <string name="opis">Opis</string>
 </resources>
