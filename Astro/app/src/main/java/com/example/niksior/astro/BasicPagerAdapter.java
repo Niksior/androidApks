@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.niksior.astro.fragments.MoonFragment;
+import com.example.niksior.astro.fragments.MoreWeatherFragment;
 import com.example.niksior.astro.fragments.SunFragment;
 import com.example.niksior.astro.fragments.WeatherFragment;
 
@@ -26,12 +27,15 @@ public class BasicPagerAdapter extends FragmentStatePagerAdapter {
             case 2: {
                 return new WeatherFragment();
             }
+            case 3: {
+                return new MoreWeatherFragment();
+            }
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }
