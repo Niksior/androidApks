@@ -47,7 +47,7 @@ public class WeatherFragment extends Fragment {
             Double d = (temp - 32) / 1.8;
             temp = d.intValue();
         }
-        String tmp = String.valueOf(temp) + "°" + sharedPreferences.getString("j_temp", "C");
+        String tmp = String.valueOf(temp) + "°" + sharedPreferences.getString("j_temp", "F");
         temperatura.setText(tmp);
         cisnienie.setText((sharedPreferences.getString("cisnienie", "1") + "hPa"));
         kraj.setText(sharedPreferences.getString("kraj", "Polska"));
@@ -74,5 +74,11 @@ public class WeatherFragment extends Fragment {
     public void onStart() {
         ustawPogode();
         super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        ustawPogode();
+        super.onStop();
     }
 }

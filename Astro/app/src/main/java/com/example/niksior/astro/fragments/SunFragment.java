@@ -87,7 +87,26 @@ public class SunFragment extends Fragment {
     @Override
     public void onResume() {
         refresh();
+        ustawWartosci();
         super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        refresh();
+        super.onStart();
+    }
+
+    @Override
+    public void onPause() {
+        refresh();
+        super.onPause();
+    }
+
+    @Override
+    public void onStop(){
+        refresh();
+        super.onStop();
     }
 
 

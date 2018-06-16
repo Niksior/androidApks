@@ -81,4 +81,9 @@ public class ExtendedWeatherFragment extends Fragment {
         super.onStart();
     }
 
+    @Override
+    public void onStop() {
+        ustawPogode();
+        super.onStop();
+    }
 }

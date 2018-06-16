@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     }
 
     private void ustawPogode() {
+        sharedPreferences = getSharedPreferences("info", 0);
         String cityToSearch = sharedPreferences.getString("miasto", null);
         String optionSetting = sharedPreferences.getString("szukanie_miastem", null);
         String latitudeSend = sharedPreferences.getString("wys", null);
@@ -90,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     }
 
     private void pokazDane() {
-
         textWys.setText(sharedPreferences.getString("wys", null));
         textSzer.setText(sharedPreferences.getString("sze", null));
     }
@@ -156,6 +156,13 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         editor.apply();
 
         pokazDane();
+
+        sharedPreferences = getSharedPreferences("info", 0);
+        editor = sharedPreferences.edit();
+        editor.putString("wys", item.getLatitude());
+        editor.putString("sze", item.getLongitude());
+        //editor.putString("miasto", location.getCity());
+        editor.apply();
     }
 
     @Override
@@ -212,4 +219,18 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         super.onResume();
     }
 
+    public void updateFragments() {
+        Configuration configuration = getResources().getConfiguration();
+
+        if (!czyTablet(configuration)) {
+            //viewPager.setAdapter(new BasicPagerAdapter(getSupportFragmentManager()));
+        } else {
+            findViewById(R.id.fragment).refreshDrawableState();
+            findViewById(R.id.fragment2).refreshDrawableState();
+            findViewById(R.id.fragment3).refreshDrawableState();
+            findViewById(R.id.fragment4).refreshDrawableState();
+            findViewById(R.id.fragment5).refreshDrawableState();
+        }
+
+    }
 }

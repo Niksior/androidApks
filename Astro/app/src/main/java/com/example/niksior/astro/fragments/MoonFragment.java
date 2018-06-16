@@ -89,20 +89,28 @@ public class MoonFragment extends Fragment {
         }
     }
 
-//    @Override
-//    public void onStop(){
-//        getRefreshTime();
-//        super.onStop();
-//    }
+    @Override
+    public void onStop(){
+        refresh();
+        super.onStop();
+    }
 
     @Override
     public void onResume() {
         refresh();
+        ustawWartosci();
         super.onResume();
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//    }
+    @Override
+    public void onPause() {
+        refresh();
+        super.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        refresh();
+        super.onStart();
+    }
 }
